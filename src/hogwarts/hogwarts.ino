@@ -1,14 +1,19 @@
+/**
+ * @file hogwarts.ino
+ * @author Jay Roberts <jay@gloryfish.org>
+ */
+
 #include "fade.h"
 #include "flicker.h"
 #include "fire.h"
 
 //  2   Blue      Patronus Ambient
 //* 3   Blue      Patronus
-//  4   Blue      ???
-//* 5   Blue      ???
+//  4   Blue      Castle Ambient 1
+//* 5   Blue      Castle Ambient 2
 //* 6   Ice Blue  Goblet of Fire
-//  7   Blue      Castle Ambient 1
-//  8   Blue      Castle Ambient 2
+//  7   Blue      Castle Ambient 3
+//  8   Blue      Castle Ambient 4
 //* 9   Ice Blue  Pensieve
 //* 10  Red       Hagrid Hut
 //* 11  Red       Great Hall Window
@@ -42,20 +47,18 @@ void setup() {
     pinMode(leds[led], OUTPUT);
   }
 
-  startupRoutine();  
+  startupRoutine();
 
   // Always on
   digitalWrite(2, HIGH);  // Patronus Ambient
   digitalWrite(4, HIGH);  // Goblet of Fire
-  digitalWrite(5, HIGH);  // ???
+  // digitalWrite(5, HIGH);  // Unused
   digitalWrite(7, HIGH);  // Castle Ambient 1
   digitalWrite(8, HIGH);  // Castle Ambient 2
   digitalWrite(18, HIGH); // Car
 }
 
 void loop() {
-  Serial.print("Start");
-  
   unsigned long dt = millis() - previousMillis;
   previousMillis = millis();
 
@@ -72,6 +75,10 @@ void loop() {
   torch4.Update(dt);
 }
 
+/**
+ * Turns on all LEDs then illuminates each one in sequence. Useful for verifying
+ * connected LEDs when setting up the display.
+ */
 void startupRoutine() {
   // All on for two sec
   for (int led = 0; led < ledCount; led++) {
@@ -79,7 +86,7 @@ void startupRoutine() {
   }
 
   delay(2000);
-  
+
   // All off
   for (int led = 0; led < ledCount; led++) {
     digitalWrite(leds[led], LOW);
@@ -93,21 +100,6 @@ void startupRoutine() {
   }
 
   // Blink all twice
-  for (int led = 0; led < ledCount; led++) {
-    digitalWrite(leds[led], HIGH);
-  }
-
-  delay(500);
-
-  // All off
-  for (int led = 0; led < ledCount; led++) {
-    digitalWrite(leds[led], LOW);
-  }
-
-  delay(100);
-
-
-  // All on for 1 sec
   for (int led = 0; led < ledCount; led++) {
     digitalWrite(leds[led], HIGH);
   }

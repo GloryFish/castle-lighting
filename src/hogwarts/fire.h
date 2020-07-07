@@ -1,10 +1,15 @@
+/**
+ * @class Fire
+ *
+ * Implements an analog fire effect.
+ */
 class Fire
 {
   int pin;
   int currentValue;
 
   public:
-  
+
   Fire(int ledPin) {
     pin = ledPin;
     pinMode(pin, OUTPUT);
@@ -17,7 +22,7 @@ class Fire
     currentValue += delta;
 
     currentValue = constrain(currentValue, 0, 255);
-    
+
     analogWrite(pin, currentValue);
   }
 };

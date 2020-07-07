@@ -1,0 +1,5 @@
+# Lego Hogwarts Castle LED Lighting Controller
+
+This is an Arduino sketch which implements a variety of simple LED animations which can run simultaneously.
+
+Designed for my [Lego Hogwarts Castle lighting project](https://gloryfish..org/projects/lego-hogwarts-led-lighting-display). Check out that page for details about the hardware and for some pictures and video of it in action.
